@@ -22,10 +22,11 @@ Oleh Burdukov
   analysis](#optimised-portfolio-analysis)
   - [<span class="toc-section-number">3.1</span> Returns plots and
     statistics](#returns-plots-and-statistics-1)
-  - [<span class="toc-section-number">3.2</span> Findings](#findings-1)
-  - [<span class="toc-section-number">3.3</span>
+    - [<span class="toc-section-number">3.1.1</span>
+      Findings](#findings-1)
+  - [<span class="toc-section-number">3.2</span>
     Correlation](#correlation-1)
-  - [<span class="toc-section-number">3.4</span> Portfolio
+  - [<span class="toc-section-number">3.3</span> Portfolio
     construction](#portfolio-construction)
 - [<span class="toc-section-number">4</span> Risk
   analytics](#risk-analytics)
@@ -405,7 +406,7 @@ print('annualised standard deviation values of returns are:\n', annual_std)
     gold     0.160227
     Name: std, dtype: float64
 
-## Findings
+### Findings
 
 Now, the output is much more promising. Of course we first see it on the
 graphs. Returns do not appear to share the same path across the whole
@@ -558,7 +559,7 @@ print(pf_beta)
     Model:                                                 OLS   Adj. R-squared:                  0.955
     Method:                                      Least Squares   F-statistic:                 7.911e+04
     Date:                                     Sat, 03 Oct 2026   Prob (F-statistic):               0.00
-    Time:                                             15:29:01   Log-Likelihood:                 18223.
+    Time:                                             15:38:17   Log-Likelihood:                 18223.
     No. Observations:                                     3769   AIC:                        -3.644e+04
     Df Residuals:                                         3767   BIC:                        -3.643e+04
     Df Model:                                                1                                         
