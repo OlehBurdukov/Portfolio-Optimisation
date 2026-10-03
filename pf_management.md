@@ -558,7 +558,7 @@ print(pf_beta)
     Model:                                                 OLS   Adj. R-squared:                  0.955
     Method:                                      Least Squares   F-statistic:                 7.911e+04
     Date:                                     Sat, 03 Oct 2026   Prob (F-statistic):               0.00
-    Time:                                             15:26:48   Log-Likelihood:                 18223.
+    Time:                                             15:29:01   Log-Likelihood:                 18223.
     No. Observations:                                     3769   AIC:                        -3.644e+04
     Df Residuals:                                         3767   BIC:                        -3.643e+04
     Df Model:                                                1                                         
