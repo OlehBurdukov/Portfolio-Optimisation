@@ -171,14 +171,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="initial-data-manipulations" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="initial-data-manipulations"><span class="header-section-number">2.2</span> Initial data manipulations</h2>
 <p>For a start, let’s import the data:</p>
-<div id="6674f715" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>GBPUSD <span class="op">=</span> pd.read_csv(<span class="st">'Client/Proxies/GBP_USD Historical Data.csv'</span>, parse_dates <span class="op">=</span> [<span class="st">'Date'</span>], index_col <span class="op">=</span> <span class="st">'Date'</span>, thousands <span class="op">=</span> <span class="st">','</span>, na_values <span class="op">=</span> <span class="st">'n/a'</span>).sort_index(ascending <span class="op">=</span> <span class="va">True</span>) <span class="co"># import of GBP/USD indirect quote</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>sp500 <span class="op">=</span> pd.read_csv(<span class="st">'Client/Proxies/S&amp;P 500 Historical Data.csv'</span>, parse_dates <span class="op">=</span> [<span class="st">'Date'</span>], index_col <span class="op">=</span> <span class="st">'Date'</span>, thousands <span class="op">=</span> <span class="st">','</span>, na_values <span class="op">=</span> <span class="st">'n/a'</span>).sort_index(ascending <span class="op">=</span> <span class="va">True</span>) <span class="co"># import of S&amp;P500 proxy</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>ftse_allworld <span class="op">=</span> pd.read_csv(<span class="st">'Client/Proxies/FTSE All World Historical Data.csv'</span>, parse_dates <span class="op">=</span> [<span class="st">'Date'</span>], index_col <span class="op">=</span> <span class="st">'Date'</span>, na_values <span class="op">=</span> <span class="st">'n/a'</span>).sort_index(ascending <span class="op">=</span> <span class="va">True</span>) <span class="co"># import of FTSE All world proxy</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="3761afa9" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>GBPUSD <span class="op">=</span> pd.read_csv(<span class="st">'Proxies/GBP_USD Historical Data.csv'</span>, parse_dates <span class="op">=</span> [<span class="st">'Date'</span>], index_col <span class="op">=</span> <span class="st">'Date'</span>, thousands <span class="op">=</span> <span class="st">','</span>, na_values <span class="op">=</span> <span class="st">'n/a'</span>).sort_index(ascending <span class="op">=</span> <span class="va">True</span>) <span class="co"># import of GBP/USD indirect quote</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>sp500 <span class="op">=</span> pd.read_csv(<span class="st">'Proxies/S&amp;P 500 Historical Data.csv'</span>, parse_dates <span class="op">=</span> [<span class="st">'Date'</span>], index_col <span class="op">=</span> <span class="st">'Date'</span>, thousands <span class="op">=</span> <span class="st">','</span>, na_values <span class="op">=</span> <span class="st">'n/a'</span>).sort_index(ascending <span class="op">=</span> <span class="va">True</span>) <span class="co"># import of S&amp;P500 proxy</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>ftse_allworld <span class="op">=</span> pd.read_csv(<span class="st">'Proxies/FTSE All World Historical Data.csv'</span>, parse_dates <span class="op">=</span> [<span class="st">'Date'</span>], index_col <span class="op">=</span> <span class="st">'Date'</span>, na_values <span class="op">=</span> <span class="st">'n/a'</span>).sort_index(ascending <span class="op">=</span> <span class="va">True</span>) <span class="co"># import of FTSE All world proxy</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>I have shaped the data into appropriate time series for the further analysis, e.g., I’ve set the Date column as an index, sorted the whole table by it and addressed the missing values in the data frame.</p>
 <p>Next, we’d like to create the return columns. Since we’ll perform modelling for required inference, it’d be better to make use of continuous returns, i.e., log transform the simple returns column once it’s computed. Additinally, we estimate also a cumulative log returns column for the plotting purposes.</p>
-<div id="48f5931f" class="cell" data-execution_count="3">
+<div id="b313255d" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>GBPUSD[<span class="st">'Return, daily'</span>] <span class="op">=</span> GBPUSD[<span class="st">'Price'</span>].pct_change(periods <span class="op">=</span> <span class="dv">1</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>sp500[<span class="st">'Return, daily'</span>] <span class="op">=</span> (sp500[<span class="st">'Price'</span>].pct_change(periods <span class="op">=</span> <span class="dv">1</span>).add(<span class="dv">1</span>)).div(GBPUSD[<span class="st">'Return, daily'</span>].add(<span class="dv">1</span>)).sub(<span class="dv">1</span>) <span class="co"># simple returns</span></span>
@@ -190,21 +190,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>ftse_allworld[<span class="st">'Cumulative log return, daily'</span>] <span class="op">=</span> np.cumsum(ftse_allworld[<span class="st">'Log return, daily'</span>]) <span class="co"># cumulative log returns</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>At this point it was noticed that FTSE All world index starts a bit later than 15 years ago. We assume it doesn’t corrupt analysis and allign length of both time series</p>
-<div id="9a0ae060" class="cell" data-execution_count="4">
+<div id="06c547f2" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sp500 <span class="op">=</span> sp500.loc[<span class="st">'10/14/2013'</span>:<span class="st">'09/15/2026'</span>] <span class="co"># cutting the data</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="returns-plots-and-statistics" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="returns-plots-and-statistics"><span class="header-section-number">2.3</span> Returns plots and statistics</h2>
 <p>Now, as we have successfully maintained the data, we are good to construct some plots and observe statistic tables for the assets analysis.</p>
-<div id="f94f0d11" class="cell" data-execution_count="5">
+<div id="e4ce0908" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>LogReturnsData <span class="op">=</span> pd.DataFrame({<span class="st">'sp500'</span> : sp500[<span class="st">'Log return, daily'</span>],</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                               <span class="st">'sp500, cumulative'</span> : sp500[<span class="st">'Cumulative log return, daily'</span>],</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                               <span class="st">'ftse_allworld'</span> : ftse_allworld[<span class="st">'Log return, daily'</span>],</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                               <span class="st">'ftse_allworld, cumulative'</span> : ftse_allworld[<span class="st">'Cumulative log return, daily'</span>]}) <span class="co"># Assignment of the log returns dataframe for further modelling manipulations</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We are going to plot returns by 2 graphs, one for log returns themselves and one for the cumulative representiation.</p>
-<div id="7cc1fc5d" class="cell" data-execution_count="6">
+<div id="2ae514ba" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>LogReturnsData[[<span class="st">'sp500'</span>, <span class="st">'ftse_allworld'</span>]].plot(subplots <span class="op">=</span> <span class="va">True</span>) <span class="co"># plot of simple log returns</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>LogReturnsData[[<span class="st">'sp500, cumulative'</span>, <span class="st">'ftse_allworld, cumulative'</span>]].plot(kind <span class="op">=</span> <span class="st">'line'</span>) <span class="co"># plot of cumulative log returns</span></span>
@@ -226,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>As we may read it from the plots above, the correlation between both ETFs is drammaticaly strong. Such investment allocation may be as successful as investment in only one of both assets. Obviously, we are going to see similar picture on the following statistic tables.</p>
 <p>In order to obtain all necessary values for sufficient analysis, we’ll assign first table by means of the .describe() method and second using .agg() . Additionally, we’ll annualise mean return and standard deviation.</p>
-<div id="b9d73f91" class="cell" data-execution_count="7">
+<div id="46573b98" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>statistics1 <span class="op">=</span> LogReturnsData[[<span class="st">'sp500'</span>, <span class="st">'ftse_allworld'</span>]].describe() <span class="co"># descriptive statistics</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(statistics1)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>statistics2 <span class="op">=</span> LogReturnsData[[<span class="st">'sp500'</span>, <span class="st">'ftse_allworld'</span>]].agg([<span class="st">'median'</span>, <span class="st">'var'</span>, <span class="st">'skew'</span>, <span class="st">'kurtosis'</span>]) <span class="co"># descriptive statistics</span></span>
@@ -270,7 +270,7 @@ Name: std, dtype: float64</code></pre>
 <p>Taken together, the picture we observe in both tables allows us to state the following: the kurtosis coefficients correspond to what one can observe in the minimum and maximum values of both series. The outliers of S&amp;P500 extend further from the mean, than those of FTSE All-world. It also relates to what we can read from lower and upper quartile of distributions. Perhaps, more negative skewness of FTSE All-world indicates a higher share of losses among the outliers, whereas the skewness of S&amp;P500 does not raise such concerns and appears more promising in light of the above facts.</p>
 <p>Last but not least, what one can make some conclusions from is mean and standard deviation of both assets. Comparing both ETFs, we notice that S&amp;P500 has relatively high volatility of 17%, even if the mean return is greater than that of FTSE all-world.</p>
 <p>Now, we can summarise the observation by distribution plot</p>
-<div id="6bb18d09" class="cell" data-execution_count="8">
+<div id="c4bf8099" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.hist(x <span class="op">=</span> LogReturnsData[[<span class="st">'sp500'</span>, <span class="st">'ftse_allworld'</span>]], </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>         bins <span class="op">=</span> <span class="dv">50</span>, </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>         density <span class="op">=</span> <span class="va">True</span>, </span>
@@ -297,7 +297,7 @@ Name: std, dtype: float64</code></pre>
 <h2 data-number="2.4" class="anchored" data-anchor-id="correlation"><span class="header-section-number">2.4</span> Correlation</h2>
 <p>As I spoiled it at the very beginning (and as one might have seen on the cumulative returns graph), correlation issue in the portfolio is drammatic and must be addressed as part of optimisation.</p>
 <p>The following heatmap visualises the correlations.</p>
-<div id="473f404e" class="cell" data-execution_count="9">
+<div id="da52fcb3" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>correlation <span class="op">=</span> LogReturnsData[[<span class="st">'sp500'</span>, <span class="st">'ftse_allworld'</span>]].corr() <span class="co"># privides with correlation value</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>sbn.heatmap(correlation,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>            annot <span class="op">=</span> <span class="va">True</span>,</span>
@@ -320,7 +320,7 @@ Name: std, dtype: float64</code></pre>
 <p>As the owner is located in the UK, we are going to use risk-free interest rate offered by Bank of England as of this project’s publishment date. At this moment, BoE’s rate is 3.75% p.a.</p>
 <p>According to portfolio holder, 86.46% of capital is allocated in the FTSE all world ETF and 13.54% in S&amp;P500 ETF.</p>
 <p>Mind that our investor is not risk averse, from what we conclude it’d be more optimal to consider tangency portfolio later, rather than global minimum volatility option.</p>
-<div id="14263f61" class="cell" data-execution_count="10">
+<div id="31954943" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>risk_free <span class="op">=</span> <span class="fl">0.0375</span> <span class="co"># assignment of risk-free rate</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>PriceData <span class="op">=</span> pd.DataFrame({<span class="st">'sp500'</span> : sp500[<span class="st">'Price'</span>].div(GBPUSD[<span class="st">'Price'</span>]),</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'ftse_allworld'</span> : ftse_allworld[<span class="st">'Price'</span>].div(GBPUSD[<span class="st">'Price'</span>])}) <span class="co"># Price dataframe</span></span>
@@ -353,9 +353,9 @@ OrderedDict([('sp500', 0.1354), ('ftse_allworld', 0.8646)])</code></pre>
 <h1 data-number="3"><span class="header-section-number">3</span> Optimised portfolio analysis</h1>
 <p>We now observe the substitute asset, which is gold ETC. This exchange traded commodity was issued by Wisdom Tree and in order to efficiently observe it, we’ll take the Gold USD spot for the period of 15 last years as a proxy and appreciate for FX rate.</p>
 <p>The procedure with the data maintenance is more or less the same as before.</p>
-<div id="532c2c97" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sp500 <span class="op">=</span> pd.read_csv(<span class="st">'Client/Proxies/S&amp;P 500 Historical Data.csv'</span>, parse_dates <span class="op">=</span> [<span class="st">'Date'</span>], index_col <span class="op">=</span> <span class="st">'Date'</span>, thousands <span class="op">=</span> <span class="st">','</span>, na_values <span class="op">=</span> <span class="st">'n/a'</span>).sort_index(ascending <span class="op">=</span> <span class="va">True</span>) <span class="co"># reimport of this dataset due to it being cut during previous analysis part</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>gold <span class="op">=</span> pd.read_csv(<span class="st">'Client/Proxies/XAU_USD Historical Data.csv'</span>, parse_dates <span class="op">=</span> [<span class="st">'Date'</span>], index_col <span class="op">=</span> <span class="st">'Date'</span>, thousands <span class="op">=</span> <span class="st">','</span>, na_values <span class="op">=</span> <span class="st">'n/a'</span>).sort_index(ascending <span class="op">=</span> <span class="va">True</span>) <span class="co"># data for gold ETC proxy</span></span>
+<div id="727f6d8a" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sp500 <span class="op">=</span> pd.read_csv(<span class="st">'Proxies/S&amp;P 500 Historical Data.csv'</span>, parse_dates <span class="op">=</span> [<span class="st">'Date'</span>], index_col <span class="op">=</span> <span class="st">'Date'</span>, thousands <span class="op">=</span> <span class="st">','</span>, na_values <span class="op">=</span> <span class="st">'n/a'</span>).sort_index(ascending <span class="op">=</span> <span class="va">True</span>) <span class="co"># reimport of this dataset due to it being cut during previous analysis part</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>gold <span class="op">=</span> pd.read_csv(<span class="st">'Proxies/XAU_USD Historical Data.csv'</span>, parse_dates <span class="op">=</span> [<span class="st">'Date'</span>], index_col <span class="op">=</span> <span class="st">'Date'</span>, thousands <span class="op">=</span> <span class="st">','</span>, na_values <span class="op">=</span> <span class="st">'n/a'</span>).sort_index(ascending <span class="op">=</span> <span class="va">True</span>) <span class="co"># data for gold ETC proxy</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>sp500[<span class="st">'Return, daily'</span>] <span class="op">=</span> (sp500[<span class="st">'Price'</span>].pct_change(periods <span class="op">=</span> <span class="dv">1</span>).add(<span class="dv">1</span>)).div(GBPUSD[<span class="st">'Return, daily'</span>].add(<span class="dv">1</span>)).sub(<span class="dv">1</span>) <span class="co"># simple returns</span></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>sp500[<span class="st">'Log return, daily'</span>] <span class="op">=</span> np.log(sp500[<span class="st">'Return, daily'</span>].add(<span class="dv">1</span>)) <span class="co"># log returns</span></span>
@@ -368,7 +368,7 @@ OrderedDict([('sp500', 0.1354), ('ftse_allworld', 0.8646)])</code></pre>
 <section id="returns-plots-and-statistics-1" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="returns-plots-and-statistics-1"><span class="header-section-number">3.1</span> Returns plots and statistics</h2>
 <p>As before, we first plot returns and analyse descriptive statistics</p>
-<div id="eeb56eac" class="cell" data-execution_count="12">
+<div id="8c65b11b" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>LogReturnsData <span class="op">=</span> pd.DataFrame({<span class="st">'sp500'</span> : sp500[<span class="st">'Log return, daily'</span>],</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                               <span class="st">'sp500, cumulative'</span> : sp500[<span class="st">'Cumulative log return, daily'</span>],</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                               <span class="st">'gold'</span> : gold[<span class="st">'Log return, daily'</span>],</span>
@@ -434,7 +434,7 @@ Name: std, dtype: float64</code></pre>
 <p>Now, the output is much more promising. Of course we first see it on the graphs. Returns do not appear to share the same path across the whole time series any longer . Regarding the descriptive statistics, they also suggest a better picture, although not perfect. For example, despite the skewness of gold is still negative, its value is now close to 0, which is good. It essentially indicates that outliers are almost equally distributed in the both tails, which means better chances for the positive shocks. The value for kurtosis has also been reduced. It might be still far from what we wish to see, i.e., around 3, but 12.9 is what we at least can work with more securely.</p>
 <p>What might raise some concens about gold, is lower return for a slightly higher standard deviation, comparing to all-world index. Perhaps, it is still not a big problem, considering other metrics with better values and the ultimate results in the end.</p>
 <p>Summarising, we can again have a look at the new distribution plot.</p>
-<div id="47f2e2f2" class="cell" data-execution_count="13">
+<div id="55e17c5a" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plt.hist(x <span class="op">=</span> LogReturnsData[[<span class="st">'sp500'</span>, <span class="st">'gold'</span>]],</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>         bins <span class="op">=</span> <span class="dv">50</span>,</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>         density <span class="op">=</span> <span class="va">True</span>,</span>
@@ -457,7 +457,7 @@ Name: std, dtype: float64</code></pre>
 </section>
 <section id="correlation-1" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="correlation-1"><span class="header-section-number">3.3</span> Correlation</h2>
-<div id="87b93aa4" class="cell" data-execution_count="14">
+<div id="ff54494f" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>correlation <span class="op">=</span> LogReturnsData[[<span class="st">'sp500'</span>, <span class="st">'gold'</span>]].corr()</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>sbn.heatmap(correlation,</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>            annot <span class="op">=</span> <span class="va">True</span>,</span>
@@ -477,7 +477,7 @@ Name: std, dtype: float64</code></pre>
 </section>
 <section id="portfolio-construction" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="portfolio-construction"><span class="header-section-number">3.4</span> Portfolio construction</h2>
-<div id="c948a291" class="cell" data-execution_count="15">
+<div id="c21f1117" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>PriceData <span class="op">=</span> pd.DataFrame({<span class="st">'sp500'</span> : sp500[<span class="st">'Price'</span>].div(GBPUSD[<span class="st">'Price'</span>]),</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'gold'</span> : gold[<span class="st">'Price'</span>].div(GBPUSD[<span class="st">'Price'</span>])})</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -516,7 +516,7 @@ OrderedDict([('sp500', 0.81152), ('gold', 0.18848)])</code></pre>
 <h2 data-number="4.1" class="anchored" data-anchor-id="market-risk"><span class="header-section-number">4.1</span> Market risk</h2>
 <p>Let’s consider one of the most classic market risk metrics, the CAPM’s beta factor. I decided to estimate it by means of linar regression in this work, although one can easily perform it in the other way.</p>
 <p>Estimation assumes excessive return for both market and studied portfolio as an input. So, we have yet to appreciate both log returns time series for the daily risk-free rate. Mind that log returns are not to add or subtract between the assets, as its exponentialised result won’t be correct. From it follows that one has to exponentialise log retruns, subtract the daily risk-free, and then log transform the new series to proceed with modelling. Perhaps, we might say that the estimation error of log transformed difference of simple returns is low enough to difference of logarithmised returns and stick to the latter, easier approach.</p>
-<div id="6eb9db56" class="cell" data-execution_count="16">
+<div id="098199d0" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>LogReturnsData[<span class="st">'Benchmark log return, daily'</span>] <span class="op">=</span> LogReturnsData[<span class="st">'sp500'</span>]</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>LogReturnsData[<span class="st">'Excess Benchmark log return, daily'</span>] <span class="op">=</span> LogReturnsData[<span class="st">'Benchmark log return, daily'</span>].sub(np.log(<span class="dv">1</span> <span class="op">+</span> risk_free)<span class="op">/</span><span class="dv">252</span>) <span class="co"># Excess log returns of the benchmark</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -528,7 +528,7 @@ OrderedDict([('sp500', 0.81152), ('gold', 0.18848)])</code></pre>
 <li><p>S&amp;P500 ETF took place in both portfolios in this work</p></li>
 <li><p>Before diversification, the whole portfolio had correlation of almost 1 between its assets. Because of it, the whole initial portfolio should have the beta value of ca. 1 to the same benchmark. Diversification would then prove beneficial in terms of beta factor, if beta fell bellow this level, i.e., its exposure to the market risk would be smaller.</p></li>
 </ul>
-<div id="bb954ca1" class="cell" data-execution_count="17">
+<div id="e1d1ff95" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(formula <span class="op">=</span> <span class="st">'Q("Excess Portfolio log return, daily") ~ Q("Excess Benchmark log return, daily")'</span>, data <span class="op">=</span> LogReturnsData) <span class="co"># model data assignment</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>fit <span class="op">=</span> model.fit() <span class="co"># model construction</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -542,7 +542,7 @@ Dep. Variable:     Q("Excess Portfolio log return, daily")   R-squared:         
 Model:                                                 OLS   Adj. R-squared:                  0.955
 Method:                                      Least Squares   F-statistic:                 7.911e+04
 Date:                                     Sat, 03 Oct 2026   Prob (F-statistic):               0.00
-Time:                                             14:30:39   Log-Likelihood:                 18223.
+Time:                                             14:56:27   Log-Likelihood:                 18223.
 No. Observations:                                     3769   AIC:                        -3.644e+04
 Df Residuals:                                         3767   BIC:                        -3.643e+04
 Df Model:                                                1                                         
@@ -565,7 +565,7 @@ Notes:
 </div>
 </div>
 <p>Here, we can finish consideration of the market risk exposure by visualisation of the model</p>
-<div id="0a007964" class="cell" data-execution_count="18">
+<div id="aadc025e" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>sbn.regplot(data <span class="op">=</span> LogReturnsData,</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>            x <span class="op">=</span> <span class="st">'Excess Benchmark log return, daily'</span>,</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>            y <span class="op">=</span> <span class="st">'Excess Portfolio log return, daily'</span>,</span>
@@ -593,7 +593,7 @@ Notes:
 <h2 data-number="4.2" class="anchored" data-anchor-id="value-at-risk-analysis"><span class="header-section-number">4.2</span> Value-at-Risk analysis</h2>
 <p>Last, but not least, let’s define VaR and CVaR metrics for our portfolio. This part will essentially describe portfolio’s exposure to the market shocks by means of the tail risk. Value at Risk displays the least value the portfolio owner may lose with probability of ‘1 - percentile’%. In its turn, the Conditional Value at Risk, a.k.a., Expected Shortfall, measures expected loss given the same probability.</p>
 <p>I decided to perform Monte Carlo simulation of a quite large scale using normal distribution. Instead of real world returns, there are going to be 5000 sets of 1-year returns time series simulation.</p>
-<div id="86e018e0" class="cell" data-execution_count="19">
+<div id="2ab6702b" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>weights <span class="op">=</span> np.array(<span class="bu">list</span>(cleaned_weights.values())) <span class="co"># turning the weights of the tangency portfolio into an array</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>pf_mean <span class="op">=</span> np.dot(weights.T, mu) <span class="co"># annual mean return of the portfolio</span></span>
@@ -606,7 +606,7 @@ Notes:
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    simulated_returns.append(random_returns) <span class="co"># modelling of the portfolio retuns time series for one year with 5000 iterations.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>As we have the Monte Carlo simulation above, we can estimate Value at Risk and Expected Shortfall values.</p>
-<div id="9c4c92c6" class="cell" data-execution_count="20">
+<div id="d5f44f39" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>simulated_returns <span class="op">=</span> np.array(simulated_returns).T </span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>VaR_90 <span class="op">=</span> np.percentile(simulated_returns, <span class="dv">100</span> <span class="op">-</span> <span class="dv">90</span>)</span>
@@ -618,7 +618,7 @@ Notes:
 <span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>CVaR_99 <span class="op">=</span> simulated_returns[simulated_returns <span class="op">&lt;</span> VaR_99].mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>It’s rather very useful to visualise the whole simulation to be able to comment analysis.</p>
-<div id="8f9c778b" class="cell" data-execution_count="21">
+<div id="34229153" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>np.exp(LogReturnsData[<span class="st">'Portfolio log return, daily'</span>]).sub(<span class="dv">1</span>).plot(kind <span class="op">=</span> <span class="st">'density'</span>,</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                                                                  rot <span class="op">=</span> <span class="dv">45</span>,</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                                                                  title <span class="op">=</span> <span class="st">'VaR-CVaR metrics of the portfolio'</span>)</span>
@@ -650,7 +650,7 @@ Notes:
 <section id="conclusion" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Conclusion</h1>
 <p>We have found that the optimised portfolio has annual mean return of 13.2% with 14.3% volatility. Now, we need to finish the analysis with appreciation to the ongoing charges issuers request for their services.</p>
-<div id="9a105a9c" class="cell" data-execution_count="22">
+<div id="a1b3118b" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>sp500charges <span class="op">=</span> <span class="fl">0.0007</span> <span class="co"># ongoing charges from Vanguard</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>goldcharges <span class="op">=</span> <span class="fl">0.0012</span> <span class="co"># Wisdom tree's management fees etc.</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
