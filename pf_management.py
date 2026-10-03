@@ -9,9 +9,9 @@ from pypfopt import expected_returns
 import statsmodels.formula.api as smf
 
 # Import of the initial investments data
-GBPUSD = pd.read_csv('Client/Proxies/GBP_USD Historical Data.csv', parse_dates = ['Date'], index_col = 'Date', thousands = ',', na_values = 'n/a').sort_index(ascending = True)
-sp500 = pd.read_csv('Client/Proxies/S&P 500 Historical Data.csv', parse_dates = ['Date'], index_col = 'Date', thousands = ',', na_values = 'n/a').sort_index(ascending = True)
-ftse_allworld = pd.read_csv('Client/Proxies/FTSE All World Historical Data.csv', parse_dates = ['Date'], index_col = 'Date', na_values = 'n/a').sort_index(ascending = True)
+GBPUSD = pd.read_csv('Proxies/GBP_USD Historical Data.csv', parse_dates = ['Date'], index_col = 'Date', thousands = ',', na_values = 'n/a').sort_index(ascending = True)
+sp500 = pd.read_csv('Proxies/S&P 500 Historical Data.csv', parse_dates = ['Date'], index_col = 'Date', thousands = ',', na_values = 'n/a').sort_index(ascending = True)
+ftse_allworld = pd.read_csv('Proxies/FTSE All World Historical Data.csv', parse_dates = ['Date'], index_col = 'Date', na_values = 'n/a').sort_index(ascending = True)
 
 # Assignment of returns data
 GBPUSD['Return, daily'] = GBPUSD['Price'].pct_change(periods = 1)
@@ -90,8 +90,8 @@ print(cleaned_weights)
 # We now observe the substitute asset, which is gold ETC.
 
 # Import of the initial investments data
-sp500 = pd.read_csv('Client/Proxies/S&P 500 Historical Data.csv', parse_dates = ['Date'], index_col = 'Date', thousands = ',', na_values = 'n/a').sort_index(ascending = True) # reimport of this dataset due to it being cut during previous analysis part
-gold = pd.read_csv('Client/Proxies/XAU_USD Historical Data.csv', parse_dates = ['Date'], index_col = 'Date', thousands = ',', na_values = 'n/a').sort_index(ascending = True)
+sp500 = pd.read_csv('Proxies/S&P 500 Historical Data.csv', parse_dates = ['Date'], index_col = 'Date', thousands = ',', na_values = 'n/a').sort_index(ascending = True) # reimport of this dataset due to it being cut during previous analysis part
+gold = pd.read_csv('Proxies/XAU_USD Historical Data.csv', parse_dates = ['Date'], index_col = 'Date', thousands = ',', na_values = 'n/a').sort_index(ascending = True)
 
 # Assignment of returns data
 sp500['Return, daily'] = (sp500['Price'].pct_change(periods = 1).add(1)).div(GBPUSD['Return, daily'].add(1)).sub(1)
@@ -227,7 +227,3 @@ plt.title('VaR-CVaR metrics of the portfolio')
 plt.grid(True)
 plt.legend()
 plt.show()
-
-# Plot the whole Monte Carlo process
-# plt.plot(range(T), simulated_returns)
-# plt.show()
